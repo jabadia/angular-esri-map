@@ -1,0 +1,7 @@
+<h2>Geo-Processing Example</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" webmap-id="f1249e3c53f24c8e89bbabde6f71eea8" center="map.center" zoom="map.zoom" click-point="parameters.Pour_Point">
+	<esri-gp url="http://54.217.224.125/arcgis/rest/services/GP_Demo/Watershed/GPServer/watershed" parameters='parameters'/>
+</esri-map>
+<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+<p>Based on <a href="#">this sample</a>.</p>

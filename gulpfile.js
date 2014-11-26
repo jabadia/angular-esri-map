@@ -36,6 +36,7 @@ gulp.task('build-js', function() {
     'src/services/esriLoader.js',
     'src/services/esriRegistry.js',
     'src/directives/esriMap.js',
+    'src/directives/esriGp.js',
     'src/directives/esriFeatureLayer.js',
     'src/directives/esriLegend.js'])
     .pipe(concat('angular-esri-map.js'))

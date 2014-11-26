@@ -36,6 +36,10 @@
                 templateUrl: 'app/examples/map-events.html',
                 controller: 'MapEventsCtrl'
             })
+            .when('/examples/gp', {
+                templateUrl: 'app/examples/gp.html',
+                controller: 'GpCtrl'
+            })
             .when('/about', {
                 templateUrl: 'app/about/about.html',
                 controller: 'AboutCtrl'

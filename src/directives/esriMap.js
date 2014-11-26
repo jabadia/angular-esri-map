@@ -14,6 +14,7 @@
                 center: '=?',
                 zoom: '=?',
                 itemInfo: '=?',
+                clickPoint: '=?',
                 // one-way binding for other properties
                 basemap: '@',
                 // function binding for event handlers
@@ -168,6 +169,18 @@
                                 },0);
                             });
                         });
+
+                        console.log("$scope.clickPoint", $scope.clickPoint);
+                        if($scope.clickPoint !== undefined)
+                        {
+                            map.on('click', function(e)
+                            {
+                                $scope.$apply(function() // because we are now in a esri callback outside of angular cycle
+                                {
+                                    $scope.clickPoint = e.mapPoint; 
+                                });
+                            });
+                        }
 
                         // clean up
                         $scope.$on('$destroy', function () {
