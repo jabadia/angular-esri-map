@@ -5,10 +5,10 @@ angular.module('esri-map-docs')
         $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
-                lng: -122.45,
-                lat: 37.75
+                lng: -0.886,
+                lat: 41.651,
             },
-            zoom: 13,
+            zoom: 12,
             loaded: false,
         };
         // one way to get a reference to the map is to

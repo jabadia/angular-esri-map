@@ -5,10 +5,10 @@ angular.module('esri-map-docs')
         $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
-                lng: -31.036,
-                lat: 42.747
+                lng: -3.688,
+                lat: 40.453
             },
-            zoom: 3,
+            zoom: 16,
             basemap: 'satellite'
         };
     });

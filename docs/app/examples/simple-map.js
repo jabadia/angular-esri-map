@@ -5,9 +5,9 @@ angular.module('esri-map-docs')
         $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
-                lng: -122.45,
-                lat: 37.75
+                lng: -3.692,
+                lat: 40.426
             },
-            zoom: 13
+            zoom: 16
         };
     });
