@@ -28,7 +28,7 @@
                 var gpDeferred = $q.defer();
                 var gpDescription = null;
 
-                $scope.state = "initalizing";
+                $scope.state = 'initalizing';
 
                 require([
                     'esri/tasks/Geoprocessor'], function (Geoprocessor) {
@@ -39,12 +39,12 @@
 					console.log('creating gp', gp);
 
 					$http.jsonp($attrs.url + '?f=json&callback=JSON_CALLBACK')
-						.success(function(data,status,headers,config)
+						.success(function(data/*,status,headers,config*/)
 						{
 							gpDescription = data;
 		                    gpDeferred.resolve(gp);
 						})
-						.error(function(data,status,headers,config)
+						.error(function(data,status/*,headers,config*/)
 						{
 		                    gpDeferred.reject(status);
 						});
@@ -67,28 +67,26 @@
                 var gpController = controllers[0];
                 var mapController = controllers[1];
 
-                gpController.getGp().then(function (gp) {
-                	mapController.getMap().then(function(map)
-                	{
-						var gpDescription = gpController.getGpDescription();
-						// console.log(gpDescription);
+                gpController.getGp().then(function (gp) 
+                {
+					var gpDescription = gpController.getGpDescription();
 
-						var inputParameters = gpDescription.parameters.filter(function(p){ return p.direction === 'esriGPParameterDirectionInput';});
-						var outputParameters = gpDescription.parameters.filter(function(p){ return p.direction === 'esriGPParameterDirectionOutput';});
+					var inputParameters = gpDescription.parameters.filter(function(p){ return p.direction === 'esriGPParameterDirectionInput';});
+					var outputParameters = gpDescription.parameters.filter(function(p){ return p.direction === 'esriGPParameterDirectionOutput';});
 
-						console.log('inputs', inputParameters);
-						console.log('outputs', outputParameters);
+					console.log('inputs', inputParameters);
+					console.log('outputs', outputParameters);
 
-		                scope.state = 'ready';
-                	});
+	                scope.state = 'ready';
                 });
 
                 // notice 3rd parameter to $watch(_,_,true), telling angular to look at the properties of the object
                 scope.$watch('parameters', function(newParameters,oldParameters) 
                 {
                 	console.log('parameters changed', newParameters);
-                	if(newParameters == null)
+                	if(newParameters === null) {
                 		return;
+                	}
 
                 	require(['esri/graphic','esri/tasks/FeatureSet','esri/graphicsUtils',
 							 'esri/symbols/SimpleMarkerSymbol', 'esri/symbols/SimpleLineSymbol', 'esri/symbols/SimpleFillSymbol', 'dojo/_base/Color' ], 
@@ -98,13 +96,15 @@
 
                 		mapController.getMap().then(function(map)
                 		{
-                			if( map.graphics )
+                			if( map.graphics ) {
 								map.graphics.clear();
+							}
 
 		                	for(var p in newParameters)
 		                	{
-		                		if( newParameters[p] === null )
+		                		if( newParameters[p] === null ) {
 		                			return;
+		                		}
 
 		                		if( newParameters[p].type === 'point' )
 		                		{

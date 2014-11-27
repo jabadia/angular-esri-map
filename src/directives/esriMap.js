@@ -177,7 +177,7 @@
                             {
                                 $scope.$apply(function() // because we are now in a esri callback outside of angular cycle
                                 {
-                                    console.log("map clicked on",e.mapPoint);
+                                    console.log('map clicked on',e.mapPoint);
                                     $scope.clickPoint = e.mapPoint; 
                                 });
                             });
