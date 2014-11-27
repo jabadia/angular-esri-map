@@ -40,6 +40,10 @@
                 templateUrl: 'app/examples/gp.html',
                 controller: 'GpCtrl'
             })
+            .when('/examples/gp2', {
+                templateUrl: 'app/examples/gp2.html',
+                controller: 'Gp2Ctrl'
+            })
             .when('/about', {
                 templateUrl: 'app/about/about.html',
                 controller: 'AboutCtrl'

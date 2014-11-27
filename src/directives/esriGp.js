@@ -28,6 +28,8 @@
                 var gpDeferred = $q.defer();
                 var gpDescription = null;
 
+                $scope.state = "initalizing";
+
                 require([
                     'esri/tasks/Geoprocessor'], function (Geoprocessor) {
                     var gp = new Geoprocessor($attrs.url);
@@ -36,7 +38,7 @@
 					});
 					console.log('creating gp', gp);
 
-					$http.get($attrs.url + '?f=json')
+					$http.jsonp($attrs.url + '?f=json&callback=JSON_CALLBACK')
 						.success(function(data,status,headers,config)
 						{
 							gpDescription = data;
@@ -84,7 +86,8 @@
                 	});
                 });
 
-                scope.$watch('parameters', function(newParameters,oldParameters)
+                // notice 3rd parameter to $watch(_,_,true), telling angular to look at the properties of the object
+                scope.$watch('parameters', function(newParameters,oldParameters) 
                 {
                 	console.log('parameters changed', newParameters);
                 	if(newParameters == null)
@@ -118,13 +121,22 @@
 		                			parameters[p] = featureSet;
 									map.graphics.add(graphic);
 		                		}
+		                		else
+		                		{
+		                			parameters[p] = newParameters[p];
+		                		}
 		                	}
 
 			                gpController.getGp().then(function (gp) {
-			                	console.log('invoking gp',gp);
+			                	console.log('invoking gp',gp, parameters);
 								scope.state = 'working';
 			                	gp.execute(parameters, function(results,messages)
 			                	{
+									var pointSymbol = new SimpleMarkerSymbol();
+									pointSymbol.setSize(14);
+									pointSymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 1));
+									pointSymbol.setColor(new Color([255, 0, 0, 0.75]));
+
 									var polySymbol = new SimpleFillSymbol();
 									polySymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([0, 0, 255, 0.5]), 1));
 									polySymbol.setColor(new Color([0, 127, 255, 0.6]));
@@ -132,13 +144,28 @@
 			                		console.log(results);
 			                		console.log(messages);
 
-									var features = results[1].value.features;
-									for (var f = 0, fl = features.length; f < fl; f++) {
-										var feature = features[f];
-										feature.setSymbol(polySymbol);
-										console.log(feature);
-										map.graphics.add(feature).getDojoShape().moveToBack();
+									for(var i=0; i<results.length; i++)
+									{										
+										var features = results[i].value.features;
+										for (var f = 0, fl = features.length; f < fl; f++) {
+											var feature = features[f];
+											console.log(results[i].value.geometryType);
+											switch(results[i].value.geometryType)
+											{
+												case 'esriGeometryPoint':
+													console.log('pointSymbol', pointSymbol);
+													feature.setSymbol(pointSymbol);	
+													break;
+												case 'esriGeometryPolygon':
+													console.log('polySymbol', polySymbol);
+													feature.setSymbol(polySymbol);
+													break;
+											}
+											console.log(feature);
+											map.graphics.add(feature).getDojoShape().moveToBack();
+										}
 									}
+									console.log(map.graphics.graphics);
 									map.setExtent(graphicsUtils.graphicsExtent(map.graphics.graphics), true);
 									scope.$apply(function()
 									{
@@ -149,7 +176,6 @@
 			                });
 			            });	
                 	});
-
 
                 }, true);
             }

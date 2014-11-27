@@ -1,0 +1,26 @@
+<style>
+	.msg-list
+	{
+		font-size: small;
+		color: gray;
+	}
+	.working
+	{
+		color: red;
+	}
+	.ready
+	{
+		color: green;
+	}	
+</style>
+<h2>Geo-Processing Example</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" center="map.center" zoom="map.zoom" click-point="parameters.Input_Location" basemap="topo">
+	<esri-gp url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons" parameters='parameters' state='gpstate' messages='messages'/>
+</esri-map>
+<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+<p>state: <span ng-class="gpstate">{{gpstate}}</span></p>
+<div class="msg-list">
+	<div ng-repeat="msg in messages">{{msg.description}}</div>
+</div>
+<p>Based on <a href="#">this sample</a>.</p>
