@@ -170,13 +170,14 @@
                             });
                         });
 
-                        console.log("$scope.clickPoint", $scope.clickPoint);
                         if($scope.clickPoint !== undefined)
                         {
+                            console.log('registering click event');
                             map.on('click', function(e)
                             {
                                 $scope.$apply(function() // because we are now in a esri callback outside of angular cycle
                                 {
+                                    console.log("map clicked on",e.mapPoint);
                                     $scope.clickPoint = e.mapPoint; 
                                 });
                             });

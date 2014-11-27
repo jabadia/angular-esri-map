@@ -70,9 +70,6 @@
                 gpController.getGp().then(function (gp) {
                 	mapController.getMap().then(function(map)
                 	{
-                		console.log('setting output sr to', map.spatialReference);
-						gp.setOutputSpatialReference( map.spatialReference );
-
 						var gpDescription = gpController.getGpDescription();
 						// console.log(gpDescription);
 
@@ -101,7 +98,8 @@
 
                 		mapController.getMap().then(function(map)
                 		{
-							map.graphics.clear();
+                			if( map.graphics )
+								map.graphics.clear();
 
 		                	for(var p in newParameters)
 		                	{
@@ -130,6 +128,8 @@
 			                gpController.getGp().then(function (gp) {
 			                	console.log('invoking gp',gp, parameters);
 								scope.state = 'working';
+		                		console.log('setting output sr to', map.spatialReference);
+								gp.setOutputSpatialReference( map.spatialReference );
 			                	gp.execute(parameters, function(results,messages)
 			                	{
 									var pointSymbol = new SimpleMarkerSymbol();

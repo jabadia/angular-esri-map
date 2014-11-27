@@ -5,12 +5,12 @@ angular.module('esri-map-docs')
         $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
-                lng: -122.45,
-                lat: 37.75
+                lng: -80.162,
+                lat: 25.700
             },
-            zoom: 14
+            zoom: 11
         };
-        $scope.parameters = { Input_Location: null, Drive_Times: "1 5 10" };
+        $scope.parameters = { Input_Location: null, Drive_Times: "2 4 6" };
         $scope.gpstate = "ready";
         $scope.messages = [];
     });
