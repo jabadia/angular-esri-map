@@ -11,6 +11,8 @@ angular.module('esri-map-docs')
             zoom: 16
         };
         $scope.parameters = { Pour_Point: null };
+        $scope.gpstate = "ready";
+        $scope.messages = [];
 
         $scope.$watch('parameters.Pour_Point', function(newpoint,oldpoint)
         {
