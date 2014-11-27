@@ -13,7 +13,8 @@
 		color: green;
 	}	
 </style>
-<h2>Geo-Processing Example</h2>
+<h2>Geo-Processing Example - Drive Times</h2>
+<p>Click on the map to execute gp service</p>
 <!-- add map to page and bind to scope map parameters -->
 <esri-map id="map" center="map.center" zoom="map.zoom" click-point="parameters.Input_Location" basemap="topo">
 	<esri-gp url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons" parameters='parameters' state='gpstate' messages='messages'/>
