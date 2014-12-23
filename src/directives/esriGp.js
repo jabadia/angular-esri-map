@@ -77,6 +77,10 @@
 					console.log('inputs', inputParameters);
 					console.log('outputs', outputParameters);
 
+					/* for each input parameter NOT specified in attrs, create a UI element */
+					var freeInputParameters = inputParameters.filter(function(p){ return !scope.parameters.hasOwnProperty(p.name)})
+					console.log(freeInputParameters);
+
 	                scope.state = 'ready';
                 });
 
