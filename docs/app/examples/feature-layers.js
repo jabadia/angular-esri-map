@@ -10,4 +10,6 @@ angular.module('esri-map-docs')
             },
             zoom: 12
         };
+        $scope.clickedPark = null;
+        $scope.clickedTree = null;
     });

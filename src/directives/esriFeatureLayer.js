@@ -7,6 +7,11 @@
             // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
             restrict: 'E',
 
+            // isoloate scope
+            scope: {
+                clickFeature: '=?'
+            },
+
             // require the esriFeatureLayer to have its own controller as well an esriMap controller
             // you can access these controllers in the link function
             require: ['esriFeatureLayer', '^esriMap'],
@@ -49,6 +54,19 @@
                       hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
                       defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
                     });
+
+                    if(scope.clickFeature !== undefined)
+                    {
+                        console.log("registering click on feature event");
+                        layer.on('click', function(e)
+                        {
+                            scope.$apply(function() // because we are now in a esri callback outside of angular cycle
+                            {
+                                console.log('map clicked on',e.graphic);
+                                scope.clickFeature = e.graphic; 
+                            });                            
+                        });
+                    }
 
                     // return the layer
                     return layer;
