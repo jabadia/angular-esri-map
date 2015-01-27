@@ -1,0 +1,31 @@
+<style>
+	.msg-list
+	{
+		font-size: small;
+		color: gray;
+	}
+	.working
+	{
+		color: red;
+	}
+	.ready
+	{
+		color: green;
+	}	
+</style>
+<h2>Geo-Processing Example - Watersheds</h2>
+<p>Click on the map to execute gp service</p>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" webmap-id="f1249e3c53f24c8e89bbabde6f71eea8" center="map.center" zoom="map.zoom" click-point="parameters.Pour_Point">
+	<esri-gp url="http://demos2.esri.es/arcgis/rest/services/GP_Demo/Watershed/GPServer/watershed" parameters='parameters' state='gpstate' messages='messages'/>
+</esri-map>
+<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+<p>state: <span ng-class="gpstate">{{gpstate}}</span></p>
+<div class="msg-list">
+	<div ng-repeat="msg in messages">{{msg.description}}</div>
+</div>
+<p>Based on <a href="#">this sample</a>.</p>
+<p>See the source code
+    <a href="https://github.com/jabadia/angular-esri-map/blob/master/docs/app/examples/gp.html">html</a> | 
+    <a href="https://github.com/jabadia/angular-esri-map/blob/master/docs/app/examples/gp.js">js</a>
+</p>

@@ -5,21 +5,26 @@ angular.module('esri-map-docs')
         $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
-                lng: -122.45,
-                lat: 37.75
+                lng: -3.676,
+                lat: 40.430
             },
             zoom: 12,
-            basemap: 'topo'
+            basemap: 'streets'
         };
         $scope.cities = {
-            SanFrancisco: {
-                lng: -122.45,
-                lat: 37.75,
-                zoom: 10
+            Madrid: {
+                lng: -3.676,
+                lat: 40.430,
+                zoom: 12
             },
-            NewYork: {
-                lng: -74.0059,
-                lat: 40.7127,
+            Barcelona: {
+                lng: 2.145,
+                lat: 41.390,
+                zoom: 12
+            },
+            Zaragoza: {
+                lng: -0.886,
+                lat: 41.651,
                 zoom: 12
             }
         };

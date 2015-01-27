@@ -5,10 +5,10 @@ angular.module('esri-map-docs')
         $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
-                lng: -122.45,
-                lat: 37.75
+                lng: null,
+                lat: null
             },
-            zoom: 13
+            zoom: null
         };
         $scope.goToBookmark = function(bookmark) {
             esriRegistry.get('myMap').then(function(map) {
