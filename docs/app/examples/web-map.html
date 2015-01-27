@@ -12,7 +12,7 @@
 </esri-map>
 <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
 <p>
-    <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
+    <button class="btn btn-default" ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
 </p>
 <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html" target="_blank">this sample</a>.</p>
 <p>See the source code

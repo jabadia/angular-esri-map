@@ -1,9 +1,11 @@
 <h2>Basemap Example</h2>
 <esri-map id="map" center="map.center" zoom="map.zoom" basemap="{{map.basemap}}">
 </esri-map>
-<p>Basemap:
-    <select ng-model="map.basemap">
+<div style="margin:8px auto;" class="form-inline">
+    Basemap:
+    <select class="form-control" ng-model="map.basemap">
         <option value="gray">Gray</option>
+        <option value="dark-gray">Dark Gray</option>
         <option value="topo">Topographic</option>
         <option value="streets">Streets</option>
         <option value="satellite">Satellite</option>
@@ -13,7 +15,7 @@
         <option value="osm">Open Street Map</option>
     </select>
     Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}
-</p>
+</div>
 <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_agol.html" target="_blank">this sample</a>.</p>
 <p>See the source code
     <a href="https://github.com/jabadia/angular-esri-map/blob/master/docs/app/examples/basemap.html">html</a> | 
